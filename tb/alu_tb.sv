@@ -2,11 +2,11 @@ module alu_tb;
 
   parameter BW = 16; // bitwidth
 
-  logic unsigned [BW-1:0] in_a;
-  logic unsigned [BW-1:0] in_b;
-  logic             [3:0] opcode;
-  logic unsigned [BW-1:0] out;
-  logic             [2:0] flags; // {overflow, negative, zero}
+  logic signed [BW-1:0] in_a;
+  logic signed [BW-1:0] in_b;
+  logic        [2:0] opcode;
+  logic signed [BW:0] out;
+  logic        [2:0] flags; // {overflow, negative, zero}
 
   // Instantiate the ALU
   alu #(BW) dut (
@@ -23,6 +23,14 @@ module alu_tb;
     in_b = '0;
     opcode = '0;
     #10ns;
-    // Complete your testbench code here
+    $display("a\t b\t opcode\t out\t flags");
+    for(int i=0; i<10; i++) begin
+      in_a=$urandom_range(-2**(BW-1), 2**(BW-1)-1);
+      in_b=$urandom_range(-2**(BW-1), 2**(BW-1)-1);
+      opcode=$urandom_range(0,7);
+      #10
+      $display("%d\t%d\t%b\t%d\t%b", in_a, in_b, opcode, out, flags);
+    end
+    $finish
   end
 endmodule
