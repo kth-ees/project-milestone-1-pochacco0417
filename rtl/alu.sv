@@ -24,18 +24,18 @@ module alu #(
   end
 
   always_comb begin
-    flag[2]=1'b0;
+    flags[2]=1'b0;
     if(opcode==3'b000) begin
       if((in_a[BW-1]&in_b[BW-1]&~out[BW-1])|(~in_a[BW-1]&~in_b[BW-1]&out[BW-1]))
-        flag[2]=1'b1;
+        flags[2]=1'b1;
     end else if(opcode==3'b001) begin
       if((in_a[BW-1]&~in_b[BW-1]&~out[BW-1])|(~in_a[BW-1]&in_b[BW-1]&out[BW-1]))
-        flag[2]=1'b1;
+        flags[2]=1'b1;
     end
   end
 
-  assign flag[1]=out[BW];
-  assign flag[0]=~|out;      
+  assign flags[1]=out[BW];
+  assign flags[0]=~|out;      
 
 endmodule
 
