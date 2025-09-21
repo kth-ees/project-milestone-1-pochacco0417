@@ -31,6 +31,6 @@ module alu_tb;
       #10
       $display("%d\t%d\t%b\t%d\t%b", in_a, in_b, opcode, out, flags);
     end
-    $finish
+    $finish;
   end
 endmodule
