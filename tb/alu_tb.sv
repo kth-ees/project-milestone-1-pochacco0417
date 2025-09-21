@@ -1,3 +1,4 @@
+`timescale 1ns/1ns
 module alu_tb;
 
   parameter BW = 16; // bitwidth
@@ -22,15 +23,15 @@ module alu_tb;
     in_a = '0;
     in_b = '0;
     opcode = '0;
-    #10ns;
+    #10;
     $display("a\t b\t opcode\t out\t flags");
     for(int i=0; i<10; i++) begin
       in_a=$urandom_range(-2**(BW-1), 2**(BW-1)-1);
       in_b=$urandom_range(-2**(BW-1), 2**(BW-1)-1);
       opcode=$urandom_range(0,7);
-      #10
+      #10;
       $display("%d\t%d\t%b\t%d\t%b", in_a, in_b, opcode, out, flags);
     end
-    $finish;
+    #10 $finish;
   end
 endmodule
